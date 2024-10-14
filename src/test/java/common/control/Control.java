@@ -2,6 +2,7 @@ package common.control;
 
 import common.Session;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 public class Control {
@@ -9,7 +10,7 @@ public class Control {
     protected WebElement control;
     protected By locator;
 
-    public Control(By locator){
+    public Control(By locator) {
         this.locator = locator;
     }
 
@@ -21,30 +22,39 @@ public class Control {
         return locator;
     }
 
-    protected void findControl(){
+    protected void findControl() {
         control = Session.getInstance().getDriver().findElement(locator);
     }
 
-    public void click(){
+    public void click() {
         findControl();
         control.click();
     }
 
-    public boolean isControlDisplayed(){
-        try{
+    public boolean isControlDisplayed() {
+        try {
             findControl();
             return control.isDisplayed();
-        } catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
 
-    public String getAttribute(String attributeName){
-        try{
+    public String getAttribute(String attributeName) {
+        try {
             findControl();
             return control.getAttribute(attributeName);
-        } catch (Exception e){
+        } catch (Exception e) {
             return "";
+        }
+    }
+
+    public void scrollInto() {
+        try {
+            JavascriptExecutor js = (JavascriptExecutor) Session.getInstance().getDriver();
+            findControl();
+            js.executeScript("arguments[0].scrollIntoView();", control);
+        } catch (Exception e) {
         }
     }
 }

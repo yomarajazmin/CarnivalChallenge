@@ -22,7 +22,7 @@ public class SearchResultPage {
     public Button specialtySailingsButton = new Button(By.xpath(SearchResultPageLocators.SPECIALTY_SAILINGS.getLocator()));
     public Button sortByButton = new Button(By.xpath(SearchResultPageLocators.SORT_BY.getLocator()));
 
-    public TextBox maxBudget = new TextBox(By.xpath(SearchResultPageLocators.MAX_VACATION_BUDGET.getLocator()));
+    public TextBox maxBudget = new TextBox(By.id(SearchResultPageLocators.MAX_VACATION_BUDGET.getLocator()));
     public Button sortByLowToHighButton = new Button(By.xpath(SearchResultPageLocators.LOW_TO_HIGH.getLocator()));
     public Button sortByHighToLowButton = new Button(By.xpath(SearchResultPageLocators.HIGH_TO_LOW.getLocator()));
 

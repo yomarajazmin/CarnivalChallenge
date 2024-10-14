@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 
 public class MainPage {
 
+    public Button agreeCookiesButton = new Button(By.id(MainPageLocators.AGREE_COOKIES_POLICY.getLocator()));
     public Button sailToButton = new Button(By.id(MainPageLocators.SAIL_TO.getLocator()));
     public Button durationButton = new Button(By.id(MainPageLocators.DURATION.getLocator()));
     public Button searchButton = new Button(By.xpath(MainPageLocators.SEARCH_CRUISES.getLocator()));

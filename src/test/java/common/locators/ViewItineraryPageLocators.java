@@ -12,10 +12,10 @@ public enum ViewItineraryPageLocators {
     ONBOARD_DINING("//h3[contains(.,'Onboard Dining')]/parent::div//div[@data-testid='obaSection']//div[@data-index]"),
 
     //day item
-    READ_MORE("//button[@aria-controls='read-more-s%']"),
-    THINGS_TO_DO("//button[@aria-controls='things-to-do-section-s%']"),
+    READ_MORE("//button[@aria-controls='read-more-%s']"),
+    THINGS_TO_DO("//button[@aria-controls='things-to-do-section-%s']"),
     THINGS_TO_DO_LIST("//div[@data-testid='thingsToDoSection']//div[@data-index]"),
-    SHORE_EXCURSIONS("//button[@aria-controls='excursions-section-s%']"),
+    SHORE_EXCURSIONS("//button[@aria-controls='excursions-section-%s']"),
     SHORE_EXCURSIONS_LIST("//div[@data-testid='excursionsSection']//div[@data-index]");
 
     public final String locator;
