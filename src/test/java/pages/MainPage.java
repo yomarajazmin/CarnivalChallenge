@@ -6,6 +6,8 @@ import common.locators.MainPageLocators;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.concurrent.TimeUnit;
+
 public class MainPage {
 
     public Button agreeCookiesButton = new Button(By.id(MainPageLocators.AGREE_COOKIES_POLICY.getLocator()));
@@ -14,6 +16,7 @@ public class MainPage {
     public Button searchButton = new Button(By.xpath(MainPageLocators.SEARCH_CRUISES.getLocator()));
 
     public void clickOnOption(String option) {
+        Session.getSession().getDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         WebElement element = Session.getInstance().getDriver().findElement(By.xpath(String.format(MainPageLocators.OPTION.getLocator(), option)));
         element.click();
     }

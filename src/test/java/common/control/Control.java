@@ -1,9 +1,16 @@
 package common.control;
 
 import common.Session;
+import org.junit.rules.Timeout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class Control {
 
@@ -29,11 +36,13 @@ public class Control {
     public void click() {
         findControl();
         control.click();
+        Session.getSession().getDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
     public boolean isControlDisplayed() {
         try {
             findControl();
+            Session.getSession().getDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
             return control.isDisplayed();
         } catch (Exception e) {
             return false;

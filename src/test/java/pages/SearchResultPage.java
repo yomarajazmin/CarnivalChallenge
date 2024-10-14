@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class SearchResultPage {
 
@@ -44,6 +45,7 @@ public class SearchResultPage {
     public void clickOnViewItineraryFromCruiseNumber(int number) {
         List<WebElement> elements = Session.getInstance().getDriver().findElements(viewItineraryLink.getLocator());
         elements.get(number - 1).click();
+        Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     public String getNumberOfResults() {

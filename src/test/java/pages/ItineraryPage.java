@@ -6,6 +6,7 @@ import common.control.Label;
 import common.control.TextBox;
 import common.locators.ViewItineraryPageLocators;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -17,21 +18,31 @@ public class ItineraryPage {
     public TextBox shipDescriptionTextbox = new TextBox(By.xpath(ViewItineraryPageLocators.SHIP_DESCRIPTION.getLocator()));
 
     public void clickOnReadMoreOfDay(int dayNumber) {
+        JavascriptExecutor js = (JavascriptExecutor) Session.getInstance().getDriver();
         WebElement element = Session.getInstance().getDriver().findElement(By.xpath(String.format(ViewItineraryPageLocators.READ_MORE.getLocator(), dayNumber - 1)));
+        js.executeScript("arguments[0].scrollIntoView();", element);
         element.click();
     }
 
     public String getReadMoreLinkText(int dayNumber) {
         WebElement element = Session.getInstance().getDriver().findElement(By.xpath(String.format(ViewItineraryPageLocators.READ_MORE.getLocator(), dayNumber - 1)));
+        JavascriptExecutor js = (JavascriptExecutor) Session.getInstance().getDriver();
+        js.executeScript("arguments[0].scrollIntoView();", element);
         return element.getAttribute("textContent");
     }
 
     public void clickOnThingsToDoOfDay(int dayNumber) {
         WebElement element = Session.getInstance().getDriver().findElement(By.xpath(String.format(ViewItineraryPageLocators.THINGS_TO_DO.getLocator(), dayNumber - 1)));
+        JavascriptExecutor js = (JavascriptExecutor) Session.getInstance().getDriver();
+        js.executeScript("arguments[0].scrollIntoView();", element);
+        element.click();
     }
 
     public void clickOnShoreExcursionsOfDay(int dayNumber) {
         WebElement element = Session.getInstance().getDriver().findElement(By.xpath(String.format(ViewItineraryPageLocators.SHORE_EXCURSIONS.getLocator(), dayNumber - 1)));
+        JavascriptExecutor js = (JavascriptExecutor) Session.getInstance().getDriver();
+        js.executeScript("arguments[0].scrollIntoView();", element);
+        element.click();
     }
 
     public boolean isThingsToDoListEmpty() {
@@ -52,5 +63,10 @@ public class ItineraryPage {
     public boolean isOnboardDiningListEmpty() {
         List<WebElement> element = Session.getInstance().getDriver().findElements(By.xpath(ViewItineraryPageLocators.ONBOARD_DINING.getLocator()));
         return element == null || element.size() == 0;
+    }
+
+    public boolean isShipNameDisplayed() {
+        shipLabel.scrollInto();
+        return shipLabel.isControlDisplayed();
     }
 }

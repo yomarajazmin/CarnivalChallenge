@@ -5,9 +5,12 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.ItineraryPage;
 import pages.MainPage;
 import pages.SearchResultPage;
+
+import java.util.concurrent.TimeUnit;
 
 public class StepDefinition {
     MainPage mainPage = new MainPage();
@@ -50,6 +53,7 @@ public class StepDefinition {
     @And("I click on SEARCH CRUISE button in main page")
     public void iClickOnSearchCruiseButton() {
         mainPage.searchButton.click();
+        Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     @And("^I click on (Number if Guests|Deals|Ships|Vacation Budget|Specialty Sailings) in search result page$")
@@ -99,4 +103,41 @@ public class StepDefinition {
         Assert.assertTrue(searchResultPage.areTheListOfResultsSortInDescOrder());
     }
 
+    @Then("I check if BOOK NOW button is displayed in itinerary page")
+    public void iCheckIfBookNowButtonIsDisplayedInItineraryPage() {
+        Assert.assertTrue(itineraryPage.bookNowButton.isControlDisplayed());
+    }
+
+    @And("^I click on (Read more|THINGS TO DO|SHORE EXCURSIONS) link from day number (.*) in itinerary page$")
+    public void iClickOnReadMoreLinkFromDayNumberInItineraryPage(String option, String number) {
+        switch (option) {
+            case "Read more" -> itineraryPage.clickOnReadMoreOfDay(Integer.parseInt(number));
+            case "THINGS TO DO" -> itineraryPage.clickOnThingsToDoOfDay(Integer.parseInt(number));
+            case "SHORE EXCURSIONS" -> itineraryPage.clickOnShoreExcursionsOfDay(Integer.parseInt(number));
+        }
+    }
+
+    @Then("^I check (Read less) link is displayed for day number (.*) in itinerary page$")
+    public void iCheckReadLessLinkFromDayNumberInItineraryPage(String expectedValue, String number) {
+        Assert.assertEquals(itineraryPage.getReadMoreLinkText(Integer.parseInt(number)), expectedValue);
+    }
+
+    @Then("^I check (THINGS TO DO|SHORE EXCURSIONS) menu is displayed for day number (.*) in itinerary page$")
+    public void iCheckOptionMenuFromDayNumberInItineraryPage(String option, String number) {
+        if (option.equals("THINGS TO DO"))
+            Assert.assertFalse(itineraryPage.isThingsToDoListEmpty());
+        else
+            Assert.assertFalse(itineraryPage.isShoreExcursionsListEmpty());
+    }
+
+    @Then("I check the ship information is in itinerary page")
+    public void iCheckTheNameAndDescriptionOfTheShipIsInItineraryPage() {
+        Assert.assertTrue(itineraryPage.isShipNameDisplayed());
+    }
+
+    @Then("I check the onboard activities and dining menus are displayed in itinerary page")
+    public void iCheckTheOnboardActivitiesAndDiningMenusAreDisplayingInItineraryPage() {
+        Assert.assertFalse(itineraryPage.isOnboardActivitiesListEmpty());
+        Assert.assertFalse(itineraryPage.isOnboardDiningListEmpty());
+    }
 }
