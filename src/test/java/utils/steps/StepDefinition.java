@@ -109,7 +109,7 @@ public class StepDefinition {
     }
 
     @And("^I click on (Read more|THINGS TO DO|SHORE EXCURSIONS) link from day number (.*) in itinerary page$")
-    public void iClickOnReadMoreLinkFromDayNumberInItineraryPage(String option, String number) {
+    public void iClickOnReadMoreLinkFromDayNumberInItineraryPage(String option, String number) throws InterruptedException {
         switch (option) {
             case "Read more" -> itineraryPage.clickOnReadMoreOfDay(Integer.parseInt(number));
             case "THINGS TO DO" -> itineraryPage.clickOnThingsToDoOfDay(Integer.parseInt(number));
@@ -118,7 +118,7 @@ public class StepDefinition {
     }
 
     @Then("^I check (Read less) link is displayed for day number (.*) in itinerary page$")
-    public void iCheckReadLessLinkFromDayNumberInItineraryPage(String expectedValue, String number) {
+    public void iCheckReadLessLinkFromDayNumberInItineraryPage(String expectedValue, String number) throws InterruptedException {
         Assert.assertEquals(itineraryPage.getReadMoreLinkText(Integer.parseInt(number)), expectedValue);
     }
 
