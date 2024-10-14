@@ -33,17 +33,17 @@ public class Control {
         control = Session.getInstance().getDriver().findElement(locator);
     }
 
-    public void click() {
-        Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    public void click() throws InterruptedException {
+        Thread.sleep(3000);
         findControl();
         control.click();
-        Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Thread.sleep(3000);
     }
 
     public boolean isControlDisplayed() {
         try {
             findControl();
-            Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+            Thread.sleep(3000);
             return control.isDisplayed();
         } catch (Exception e) {
             return false;
@@ -52,7 +52,7 @@ public class Control {
 
     public String getAttribute(String attributeName) {
         try {
-            Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+            Thread.sleep(3000);
             findControl();
             return control.getAttribute(attributeName);
         } catch (Exception e) {
@@ -62,10 +62,11 @@ public class Control {
 
     public void scrollInto() {
         try {
-            Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+            Thread.sleep(3000);
             JavascriptExecutor js = (JavascriptExecutor) Session.getInstance().getDriver();
             findControl();
             js.executeScript("arguments[0].scrollIntoView();", control);
+            Thread.sleep(3000);
         } catch (Exception e) {
         }
     }

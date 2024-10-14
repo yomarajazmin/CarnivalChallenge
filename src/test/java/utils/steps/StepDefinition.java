@@ -24,13 +24,13 @@ public class StepDefinition {
     }
 
     @And("I Agree to cookie policy in main page")
-    public void iAgreeToCookiePolicyInMainPage() {
+    public void iAgreeToCookiePolicyInMainPage() throws InterruptedException {
         if (mainPage.agreeCookiesButton.isControlDisplayed())
             mainPage.agreeCookiesButton.click();
     }
 
     @And("^I click on the (SAIL TO|SAIL FROM|DATES|DURATION) search option in main page$")
-    public void iClickOnTheSearchOption(String option) {
+    public void iClickOnTheSearchOption(String option) throws InterruptedException {
         switch (option) {
             case "SAIL TO" -> mainPage.sailToButton.click();
             case "DURATION" -> mainPage.durationButton.click();
@@ -38,7 +38,7 @@ public class StepDefinition {
     }
 
     @Then("^I select (.*) option for (SAIL TO|SAIL FROM|DATES|DURATION) in main page$")
-    public void iClickOnTheSearchOption(String value, String category) {
+    public void iClickOnTheSearchOption(String value, String category) throws InterruptedException {
         mainPage.clickOnOption(value);
         Assert.assertTrue(mainPage.checkOptionSelected(value));
     }
@@ -51,18 +51,18 @@ public class StepDefinition {
     }
 
     @And("I click on SEARCH CRUISE button in main page")
-    public void iClickOnSearchCruiseButton() {
+    public void iClickOnSearchCruiseButton() throws InterruptedException {
         mainPage.searchButton.click();
         Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     @And("^I click on (Number if Guests|Deals|Ships|Vacation Budget|Specialty Sailings) in search result page$")
-    public void iClickOnOptionInSearchResultPage(String option) {
+    public void iClickOnOptionInSearchResultPage(String option) throws InterruptedException {
         searchResultPage.vacationBudgetButton.click();
     }
 
     @And("^I set max budget to (.*) in the (Vacation Budget) in search result page$")
-    public void iSetMaxBudgetToValueInTheFilterInSearchResultPage(String value, String option) {
+    public void iSetMaxBudgetToValueInTheFilterInSearchResultPage(String value, String option) throws InterruptedException {
         searchResultPage.maxBudget.writeText(value);
         searchResultPage.vacationBudgetButton.click();
     }
@@ -79,7 +79,7 @@ public class StepDefinition {
     }
 
     @And("^I click on (Sort By) filter to select (Low to high|High to low) in search result page$")
-    public void iClickOnSortByFilterToSelectOptionInSearchResultPage(String text, String option) {
+    public void iClickOnSortByFilterToSelectOptionInSearchResultPage(String text, String option) throws InterruptedException {
         searchResultPage.sortByButton.click();
 
         if (option.equals("High to low"))

@@ -15,8 +15,9 @@ public class MainPage {
     public Button durationButton = new Button(By.id(MainPageLocators.DURATION.getLocator()));
     public Button searchButton = new Button(By.xpath(MainPageLocators.SEARCH_CRUISES.getLocator()));
 
-    public void clickOnOption(String option) {
+    public void clickOnOption(String option) throws InterruptedException {
         Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Thread.sleep(3000);
         WebElement element = Session.getInstance().getDriver().findElement(By.xpath(String.format(MainPageLocators.OPTION.getLocator(), option)));
         element.click();
     }
