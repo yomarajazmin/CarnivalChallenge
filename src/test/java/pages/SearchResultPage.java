@@ -2,6 +2,7 @@ package pages;
 
 import common.Session;
 import common.control.Button;
+import common.control.Label;
 import common.control.Link;
 import common.control.TextBox;
 import common.locators.CruiseSearchResultItemLocators;
@@ -13,6 +14,7 @@ import java.util.List;
 
 public class SearchResultPage {
 
+    public Label cruiseResultLabel = new Label(By.xpath(SearchResultPageLocators.CRUISE_RESULT_LABEL.getLocator()));
     public Button numberOfGuestButton = new Button(By.xpath(SearchResultPageLocators.NUMBER_OF_GUESTS.getLocator()));
     public Button dealsButton = new Button(By.xpath(SearchResultPageLocators.DEALS.getLocator()));
     public Button shipsButton = new Button(By.xpath(SearchResultPageLocators.SHIPS.getLocator()));
@@ -42,5 +44,23 @@ public class SearchResultPage {
     public void clickOnViewItineraryFromCruiseNumber(int number) {
         List<WebElement> elements = Session.getInstance().getDriver().findElements(viewItineraryLink.getLocator());
         elements.get(number - 1).click();
+    }
+
+    public String getNumberOfResults() {
+        String text = cruiseResultLabel.getAttribute("textContent");
+        return text.replace(" Cruise Results", "");
+    }
+
+    public boolean areTheListOfResultsSortInDescOrder(){
+        List<WebElement> elements = Session.getInstance().getDriver().findElements(By.xpath(SearchResultPageLocators.PRICE_LIST.getLocator()));
+        int currentPrice=0;
+        int previousPrice=Integer.parseInt(elements.get(0).getAttribute("textContent"));
+        boolean inOrder=true;
+
+        for (int i=1; i<=elements.size()-1 && inOrder; i++){
+            currentPrice = Integer.parseInt(elements.get(i).getAttribute("textContent"));
+            inOrder=previousPrice>currentPrice;
+        }
+        return inOrder;
     }
 }
