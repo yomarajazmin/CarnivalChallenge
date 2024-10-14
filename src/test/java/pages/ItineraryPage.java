@@ -18,32 +18,32 @@ public class ItineraryPage {
     public Label shipLabel = new Label(By.xpath(ViewItineraryPageLocators.SHIP_NAME.getLocator()));
     public TextBox shipDescriptionTextbox = new TextBox(By.xpath(ViewItineraryPageLocators.SHIP_DESCRIPTION.getLocator()));
 
-    public void clickOnReadMoreOfDay(int dayNumber) {
-        Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    public void clickOnReadMoreOfDay(int dayNumber) throws InterruptedException {
+        Thread.sleep(3000);
         JavascriptExecutor js = (JavascriptExecutor) Session.getInstance().getDriver();
         WebElement element = Session.getInstance().getDriver().findElement(By.xpath(String.format(ViewItineraryPageLocators.READ_MORE.getLocator(), dayNumber - 1)));
         js.executeScript("arguments[0].scrollIntoView();", element);
         element.click();
     }
 
-    public String getReadMoreLinkText(int dayNumber) {
-        Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    public String getReadMoreLinkText(int dayNumber) throws InterruptedException {
+        Thread.sleep(3000);
         WebElement element = Session.getInstance().getDriver().findElement(By.xpath(String.format(ViewItineraryPageLocators.READ_MORE.getLocator(), dayNumber - 1)));
         JavascriptExecutor js = (JavascriptExecutor) Session.getInstance().getDriver();
         js.executeScript("arguments[0].scrollIntoView();", element);
         return element.getAttribute("textContent");
     }
 
-    public void clickOnThingsToDoOfDay(int dayNumber) {
-        Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    public void clickOnThingsToDoOfDay(int dayNumber) throws InterruptedException {
+        Thread.sleep(3000);
         WebElement element = Session.getInstance().getDriver().findElement(By.xpath(String.format(ViewItineraryPageLocators.THINGS_TO_DO.getLocator(), dayNumber - 1)));
         JavascriptExecutor js = (JavascriptExecutor) Session.getInstance().getDriver();
         js.executeScript("arguments[0].scrollIntoView();", element);
         element.click();
     }
 
-    public void clickOnShoreExcursionsOfDay(int dayNumber) {
-        Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    public void clickOnShoreExcursionsOfDay(int dayNumber) throws InterruptedException {
+        Thread.sleep(3000);
         WebElement element = Session.getInstance().getDriver().findElement(By.xpath(String.format(ViewItineraryPageLocators.SHORE_EXCURSIONS.getLocator(), dayNumber - 1)));
         JavascriptExecutor js = (JavascriptExecutor) Session.getInstance().getDriver();
         js.executeScript("arguments[0].scrollIntoView();", element);
