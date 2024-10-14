@@ -34,15 +34,16 @@ public class Control {
     }
 
     public void click() {
+        Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         findControl();
         control.click();
-        Session.getSession().getDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     public boolean isControlDisplayed() {
         try {
             findControl();
-            Session.getSession().getDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+            Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
             return control.isDisplayed();
         } catch (Exception e) {
             return false;
@@ -51,6 +52,7 @@ public class Control {
 
     public String getAttribute(String attributeName) {
         try {
+            Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
             findControl();
             return control.getAttribute(attributeName);
         } catch (Exception e) {
@@ -60,6 +62,7 @@ public class Control {
 
     public void scrollInto() {
         try {
+            Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
             JavascriptExecutor js = (JavascriptExecutor) Session.getInstance().getDriver();
             findControl();
             js.executeScript("arguments[0].scrollIntoView();", control);

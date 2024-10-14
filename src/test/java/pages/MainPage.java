@@ -16,7 +16,7 @@ public class MainPage {
     public Button searchButton = new Button(By.xpath(MainPageLocators.SEARCH_CRUISES.getLocator()));
 
     public void clickOnOption(String option) {
-        Session.getSession().getDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebElement element = Session.getInstance().getDriver().findElement(By.xpath(String.format(MainPageLocators.OPTION.getLocator(), option)));
         element.click();
     }

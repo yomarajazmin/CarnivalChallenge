@@ -10,6 +10,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ItineraryPage {
 
@@ -18,6 +19,7 @@ public class ItineraryPage {
     public TextBox shipDescriptionTextbox = new TextBox(By.xpath(ViewItineraryPageLocators.SHIP_DESCRIPTION.getLocator()));
 
     public void clickOnReadMoreOfDay(int dayNumber) {
+        Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         JavascriptExecutor js = (JavascriptExecutor) Session.getInstance().getDriver();
         WebElement element = Session.getInstance().getDriver().findElement(By.xpath(String.format(ViewItineraryPageLocators.READ_MORE.getLocator(), dayNumber - 1)));
         js.executeScript("arguments[0].scrollIntoView();", element);
@@ -25,6 +27,7 @@ public class ItineraryPage {
     }
 
     public String getReadMoreLinkText(int dayNumber) {
+        Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebElement element = Session.getInstance().getDriver().findElement(By.xpath(String.format(ViewItineraryPageLocators.READ_MORE.getLocator(), dayNumber - 1)));
         JavascriptExecutor js = (JavascriptExecutor) Session.getInstance().getDriver();
         js.executeScript("arguments[0].scrollIntoView();", element);
@@ -32,6 +35,7 @@ public class ItineraryPage {
     }
 
     public void clickOnThingsToDoOfDay(int dayNumber) {
+        Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebElement element = Session.getInstance().getDriver().findElement(By.xpath(String.format(ViewItineraryPageLocators.THINGS_TO_DO.getLocator(), dayNumber - 1)));
         JavascriptExecutor js = (JavascriptExecutor) Session.getInstance().getDriver();
         js.executeScript("arguments[0].scrollIntoView();", element);
@@ -39,6 +43,7 @@ public class ItineraryPage {
     }
 
     public void clickOnShoreExcursionsOfDay(int dayNumber) {
+        Session.getSession().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebElement element = Session.getInstance().getDriver().findElement(By.xpath(String.format(ViewItineraryPageLocators.SHORE_EXCURSIONS.getLocator(), dayNumber - 1)));
         JavascriptExecutor js = (JavascriptExecutor) Session.getInstance().getDriver();
         js.executeScript("arguments[0].scrollIntoView();", element);
